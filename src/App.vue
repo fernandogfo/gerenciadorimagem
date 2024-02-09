@@ -4,15 +4,19 @@
     <button @click="uploadImage">Enviar Imagem</button>
 
     <h2>Imagens Originais</h2>
-    <div v-for="originalImage in originalImages" :key="originalImage.id">
-      <img :src="originalImage.imagem" alt="Imagem Original" />
-      <p>{{ originalImage.dimensoes }}</p>
+    <div style="display: flex; overflow-x: auto; white-space: nowrap;">
+      <div v-for="originalImage in originalImages" :key="originalImage.id" style="display: inline-block; margin-right: 10px;">
+        <img :src="originalImage.imagem" alt="Imagem Original" />
+        <p>{{ originalImage.dimensoes }}</p>
+      </div>
     </div>
 
     <h2>Imagens Reduzidas</h2>
-    <div v-for="reducedImage in reducedImages" :key="reducedImage.id">
-      <img :src="reducedImage.imagem" alt="Imagem Reduzida" />
-      <p>{{ reducedImage.dimensoes }}</p>
+    <div style="display: flex; overflow-x: auto; white-space: nowrap;">
+      <div v-for="reducedImage in reducedImages" :key="reducedImage.id" style="display: inline-block; margin-right: 10px;">
+        <img :src="reducedImage.imagem" alt="Imagem Reduzida" />
+        <p>{{ reducedImage.dimensoes }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -20,10 +24,8 @@
 <script>
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3000'; // Seu servidor
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE';
-
+const uploadImagesApiUrl = import.meta.env.VITE_UPLOAD_IMAGES_API_URL;
+const getImagesApiUrl = import.meta.env.VITE_GET_IMAGES_API_URL;
 export default {
   data() {
     return {
@@ -46,7 +48,7 @@ export default {
       reader.readAsDataURL(this.selectedFile);
       reader.onload = () => {
         const base64Image = reader.result.split(',')[1];
-        axios.post('https://functionfernandopf.azurewebsites.net/api/UploadImagem', { imagem: base64Image })
+        axios.post(uploadImagesApiUrl, { imagem: base64Image })
             .then(response => {
               console.log('Imagem enviada com sucesso!', response.data);
             })
@@ -54,9 +56,11 @@ export default {
               console.error('Erro ao enviar a imagem:', error);
             });
       };
+      this.fetchImages();
+      this.data();
     },
     fetchImages() {
-      axios.get('https://functionfernandopf.azurewebsites.net/api/GetImages')
+      axios.get(getImagesApiUrl)
           .then(response => {
             this.originalImages = response.data.originais;
             this.reducedImages = response.data.redimensionadas;
