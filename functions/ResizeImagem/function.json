@@ -1,0 +1,11 @@
+{
+  "bindings": [
+    {
+      "connection": "STORAGE_ACCESS_KEY",
+      "name": "myBlob",
+      "path": "images/originais/{name}",
+      "direction": "in",
+      "type": "blobTrigger"
+    }
+  ]
+}
