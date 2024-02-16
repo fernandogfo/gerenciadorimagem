@@ -24,7 +24,7 @@ jobs:
         with: 
           node-version: "18"
       - name: Update Npm
-        run: npm install -g npm@latest
+        run: npm update
       - name: Install Dependencies
         run: npm install
       - name: Build And Deploy
