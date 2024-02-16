@@ -25,7 +25,7 @@
 import axios from 'axios';
 
 const uploadImagesApiUrl = import.meta.env.VITE_UPLOAD_IMAGES_API_URL;
-const getImagesApiUrl = import.meta.env.VITE_GET_IMAGES_API_URL;
+const getImagesApiUrl = "https://functionfernandopf.azurewebsites.net/api/GetImages";
 export default {
   data() {
     return {
