@@ -24,7 +24,7 @@
 <script>
 import axios from 'axios';
 
-const uploadImagesApiUrl = import.meta.env.VITE_UPLOAD_IMAGES_API_URL;
+const uploadImagesApiUrl = "https://functionfernandopf.azurewebsites.net/api/UploadImagem";
 const getImagesApiUrl = "https://functionfernandopf.azurewebsites.net/api/GetImages";
 export default {
   data() {
