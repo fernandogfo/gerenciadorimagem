@@ -24,8 +24,8 @@
 <script>
 import axios from 'axios';
 
-const uploadImagesApiUrl = "https://functionfernandopf.azurewebsites.net/api/UploadImagem";
-const getImagesApiUrl = "https://functionfernandopf.azurewebsites.net/api/GetImages";
+const uploadImagesApiUrl = "https://function-app-fernando-pf.azurewebsites.net/api/UploadImagem";
+const getImagesApiUrl = "https://function-app-fernando-pf.azurewebsites.net/api/GetImages";
 export default {
   data() {
     return {
